@@ -112,7 +112,7 @@ public class Menu {
         System.out.println("Thank you for using the African Big Cats App!"); 
         printLine();
         System.out.println();    
-    }    
+    }  
 
     public Panthera getNewCat(String name) {        
         /*            
@@ -201,9 +201,7 @@ public class Menu {
     TIP:        
     Additional methods and functionality need to be added to this class.    
     */
-        // risk report
-    public void executeRiskReport(String name1, String name2){
-
-    }
+       
+    
 
 }
