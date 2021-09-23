@@ -8,11 +8,14 @@ public class App
     {
         Menu appMenu = new Menu();
         Character command = '_';        
-        LinkedList<Panthera> catList = new LinkedList<>();         
+        LinkedList<Panthera> catList = new LinkedList<>();    
+
+             
         
         // loop until user quits        
-        while (command != 'q') {            
-            
+        while (command != 'q') { 
+            System.out.println("cmd: "+ command);           
+
             // print the menu            
             appMenu.print();            
             
@@ -24,6 +27,7 @@ public class App
             appMenu.executeCommand(command, catList);            
             
             // move the cats to new positions in africa            
-            appMenu.update(catList);        }
+            appMenu.update(catList);        
+        }
     }
 }

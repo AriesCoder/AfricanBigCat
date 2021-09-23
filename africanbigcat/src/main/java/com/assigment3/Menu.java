@@ -48,11 +48,12 @@ public class Menu {
     // get first character from input    
     public Character getCommand() {        
         Character command = '_';        
-        String rawInput = input.nextLine();        
-        if (rawInput.length() > 0) {            
+        String rawInput = input.nextLine();   
+        if (rawInput.length() > 0) {           
             rawInput = rawInput.toLowerCase();
             command = rawInput.charAt(0);        
         }        
+        
         return command;    
     }    
 
@@ -94,11 +95,12 @@ public class Menu {
 
     // update the position of all the cats    
     public void update(LinkedList<Panthera> catList) {     
-
+       
         // update by moving all the cats        
-        for (Panthera cat: catList) {            
-            cat.move();        
-        }    
+            for (Panthera cat: catList) {            
+                cat.move();        
+            }
+          
     }    
 
     // quit the app    
@@ -122,13 +124,14 @@ public class Menu {
         Currently, the code always create a Tiger.  But, support for Lions and Jaguars            
         also needs to be added.        
         */
-
         
-        Panthera result = null;      
-        System.out.println("Enter a 1 for Tiger, 2 for Lion, 3 for Jaguard");
+        Panthera result = null;             
         
         while (result == null) {
+
+            System.out.println("Enter a 1 for Tiger, 2 for Lion, 3 for Jaguard");
             Integer userChoose = input.nextInt();
+
             switch (userChoose){
                 case 1:
                 result = new Tiger(name);        
@@ -143,11 +146,12 @@ public class Menu {
                 break;
 
                 default:
-                System.out.println("please 1, 2 or 3 only stupid!");
+                System.out.println("please 1, 2 or 3 only!");
                 break;
             }
         }
         return result;
+        
     }    
 
     // create a cat, if it's unique    
@@ -157,25 +161,30 @@ public class Menu {
         TIP:            
         In this area of the code, students would need to add in checking if thecat name            
         already exists in order to prevent duplicates        
-        */        
-        for (int i = 0; i < catList.size(); i++){
-                // get the name        
-            System.out.println();        
-            System.out.print("Enter a name for the big cat to create: ");        
+        */      
+
+        // get the name  
+        System.out.print("Enter a name for the big cat to create: ");        
             String name = input.nextLine();        
-            System.out.println(); 
+           // System.out.println();   
 
+        for (int i = 0; i < catList.size(); i++){
+                             
             if (catList.get(i).name() == name){
-                System.out.println("This name is existed. Please choose another one!");
-            }else{
-                Panthera cat = getNewCat(name);        
-                catList.add(cat);    
 
-                System.out.println("STATUS: " + name + " has been added.");
-                break;
-            }
-            
+                System.out.println("This name is existed. Please choose another one!");
+
+                System.out.print("Enter a name for the big cat to create: ");        
+                name = input.nextLine();        
+                System.out.println();
+
+                i = 0;
+            }  
+
         }       
+        Panthera cat = getNewCat(name);        
+        catList.add(cat);    
+        System.out.println("STATUS: " + name + " has been added.");
     }    
 
     // list all big cats     
