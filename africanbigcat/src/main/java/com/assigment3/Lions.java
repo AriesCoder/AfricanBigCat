@@ -24,7 +24,11 @@ public class Lions extends Panthera{
         s += "longitude: " + longitude();        
         s += ", ";        
         s += "latitude: " + latitude();        
-        s += ", ";        
+        s += ", ";    
+        s += "weight: " + getWeight() + " lbs";     
+        s += ", ";   
+        s += "speed: " + getSpeed();
+        s += ", "; 
         s += "fur: " + fur();        
         s += " }";  
 

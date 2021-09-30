@@ -13,8 +13,7 @@ public class App
              
         
         // loop until user quits        
-        while (command != 'q') { 
-            System.out.println("cmd: "+ command);           
+        while (command != 'q') {          
 
             // print the menu            
             appMenu.print();            

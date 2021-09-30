@@ -24,13 +24,23 @@ public class Jaguards extends Panthera {
         s += "longitude: " + longitude();        
         s += ", ";        
         s += "latitude: " + latitude();        
-        s += ", ";        
-        s += "fur: " + fur();        
+        s += ", ";  
+        s += "weight: " + getWeight() + " lbs";     
+        s += ", ";    
+        s += "speed: " + getSpeed();
+        s += ", ";  
+        s += "fur: " + fur();   
+        s += ", "; 
+        s += "sleepsInTrees: " + sleepsInTrees();     
         s += " }";  
 
-        return s;    
+        return s;     
     }    
     public String fur() {        
         return "spots";    
+    }
+
+    public boolean sleepsInTrees(){
+        return true;
     }
 }

@@ -47,8 +47,12 @@ public class Menu {
 
     // get first character from input    
     public Character getCommand() {        
-        Character command = '_';        
+        Character command = '_';     
+        
+        input = new Scanner(System.in);   
+
         String rawInput = input.nextLine();   
+
         if (rawInput.length() > 0) {           
             rawInput = rawInput.toLowerCase();
             command = rawInput.charAt(0);        
@@ -129,8 +133,9 @@ public class Menu {
         
         while (result == null) {
 
-            System.out.println("Enter a 1 for Tiger, 2 for Lion, 3 for Jaguard");
+            System.out.print("Enter a 1 for Tiger, 2 for Lion, 3 for Jaguard: ");
             Integer userChoose = input.nextInt();
+            System.out.println();
 
             switch (userChoose){
                 case 1:
@@ -146,7 +151,8 @@ public class Menu {
                 break;
 
                 default:
-                System.out.println("please 1, 2 or 3 only!");
+                System.out.println("ERROR: Invalid big cat type. Creating a tiger named " + name);
+                result = new Tiger(name); 
                 break;
             }
         }
@@ -166,24 +172,29 @@ public class Menu {
         // get the name  
         System.out.print("Enter a name for the big cat to create: ");        
             String name = input.nextLine();        
-           // System.out.println();   
+            System.out.println();   
 
-        for (int i = 0; i < catList.size(); i++){
+        for (int i = 0; i < catList.size();){
+
                              
-            if (catList.get(i).name() == name){
+            if (catList.get(i).name().equals(name)){
 
                 System.out.println("This name is existed. Please choose another one!");
+                System.out.println(); 
 
-                System.out.print("Enter a name for the big cat to create: ");        
+                System.out.print("Enter a name for the big cat to create: ");  
                 name = input.nextLine();        
                 System.out.println();
 
                 i = 0;
+            } else {
+                i++;
             }  
 
         }       
         Panthera cat = getNewCat(name);        
-        catList.add(cat);    
+        catList.add(cat);   
+
         System.out.println("STATUS: " + name + " has been added.");
     }    
 
@@ -199,7 +210,9 @@ public class Menu {
         if (catList.size() > 0) {            
             for (Integer i = 0; i < catList.size(); i++) {                
                 cat = catList.get(i);
+                cat.setSpeed();
                 System.out.println(cat);
+                
             }        
         } else {            
             System.out.println("There are no African Big Cats. :(");        
