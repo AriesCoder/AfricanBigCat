@@ -74,14 +74,14 @@ public class Menu {
                 executeCreate(catList);                
                 break; 
 
-            /* case 'd':                
+            case 'd':                
                 executeDelete(catList);                
                 break;
             
-            case 'f':                
-                executeFind(catList);                
-                break; 
-            */
+            //case 'f':                
+            //     executeFind(catList);                
+            //     break; 
+            
             case 'l':                
                 executeList(catList);                
                 break; 
@@ -134,19 +134,18 @@ public class Menu {
         while (result == null) {
 
             System.out.print("Enter a 1 for Tiger, 2 for Lion, 3 for Jaguard: ");
-            Integer userChoose = input.nextInt();
+            String userChoose = input.nextLine();
             System.out.println();
-
             switch (userChoose){
-                case 1:
+                case "1":
                 result = new Tiger(name);        
                 break;
 
-                case 2:
+                case "2":
                 result = new Lions(name); 
                 break;
 
-                case 3:
+                case "3":
                 result = new Jaguards(name);
                 break;
 
@@ -177,7 +176,7 @@ public class Menu {
         for (int i = 0; i < catList.size();){
 
                              
-            if (catList.get(i).name().equals(name)){
+            if (catList.get(i).name().equals(name.toUpperCase())){
 
                 System.out.println("This name is existed. Please choose another one!");
                 System.out.println(); 
@@ -219,11 +218,19 @@ public class Menu {
         }
         System.out.println();    
     }
-    /*        
-    TIP:        
-    Additional methods and functionality need to be added to this class.    
-    */
-       
-    
 
+    public void executeDelete(LinkedList<Panthera> catList){
+        System.out.print("Enter a Big Cat's name to delete: ");
+        String nameToDelete = input.nextLine();
+
+        for(int i = 0; i < catList.size(); i++ ){
+            if (catList.get(i).name().equals(nameToDelete.toUpperCase())){
+                catList.remove(i);
+                System.out.println(String.format("%s is deleted", nameToDelete));
+                return;
+            }
+        }    
+                System.out.println(String.format("%s is not exist", nameToDelete));
+             
+    }
 }
