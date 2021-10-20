@@ -78,9 +78,9 @@ public class Menu {
                 executeDelete(catList);                
                 break;
             
-            //case 'f':                
-            //     executeFind(catList);                
-            //     break; 
+            case 'f':                
+                executeFind(catList);                
+                break; 
             
             case 'l':                
                 executeList(catList);                
@@ -232,5 +232,24 @@ public class Menu {
         }    
                 System.out.println(String.format("%s is not exist", nameToDelete));
              
+                
     }
-}
+
+    public void executeFind(LinkedList<Panthera> catList){
+        System.out.print("Enter a cat's name/a part of a cat's name: ");
+        String userInput = input.nextLine();
+        boolean flag = true;
+        for(int i = 0; i < catList.size(); i++){
+            if (catList.get(i).name().contains(userInput.toUpperCase())){
+                flag = false;
+                System.out.println(catList.get(i));
+            }
+            
+        }
+        if (flag) System.out.println("Name is not found.");
+        }
+        
+    
+    
+    
+}    
