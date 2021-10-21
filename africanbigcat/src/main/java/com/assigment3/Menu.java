@@ -86,6 +86,10 @@ public class Menu {
                 executeList(catList);                
                 break; 
 
+            case 'r':
+                executeRiskReport(catList);
+                break;
+
             case 'q': 
                 executeQuit();                
                 break;  
@@ -160,13 +164,7 @@ public class Menu {
     }    
 
     // create a cat, if it's unique    
-    public void executeCreate(LinkedList<Panthera> catList) {  
-       
-        /*            
-        TIP:            
-        In this area of the code, students would need to add in checking if thecat name            
-        already exists in order to prevent duplicates        
-        */      
+    public void executeCreate(LinkedList<Panthera> catList) {   
 
         // get the name  
         System.out.print("Enter a name for the big cat to create: ");        
@@ -249,7 +247,37 @@ public class Menu {
         if (flag) System.out.println("Name is not found.");
         }
         
-    
-    
-    
+    public void executeRiskReport(LinkedList<Panthera> catList){
+        //get user input
+        System.out.print("\nEnter a first big cat's name: ");
+        String name1 = input.nextLine();
+
+        Float longtitude1 = 0f;
+        Float latitude1 = 0f;
+        Float longtitude2 = 0f;
+        Float latitude2 = 0f;
+
+        for(int i = 0; i < catList.size(); i++){
+            if(catList.get(i).name().equals(name1.toUpperCase())){
+                longtitude1 = catList.get(i).longitude();
+                latitude1 = catList.get(i).latitude();                
+                break;
+            }              
+        }
+
+        System.out.print("Enter a second big cat's name: ");
+        String name2 = input.nextLine();
+
+        for(int j = 0; j < catList.size(); j++){
+            if(catList.get(j).name().equals(name2.toUpperCase())){
+                longtitude2 = catList.get(j).longitude();
+                latitude2 = catList.get(j).latitude();
+                break;
+            }
+        }
+        Float distance = (float) Math.sqrt(Math.pow(longtitude2 - longtitude1, 2) + Math.pow(latitude2 - latitude1, 2));
+        System.out.println(String.format("\nThe distance between %s and %s is %f", name1, name2, distance));
+
+    }
+        
 }    
