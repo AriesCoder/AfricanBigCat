@@ -222,7 +222,7 @@ public class Menu {
         String nameToDelete = input.nextLine();
 
         for(int i = 0; i < catList.size(); i++ ){
-            if (catList.get(i).name().equals(nameToDelete.toUpperCase())){
+            if (catList.get(i).name().toUpperCase().equals(nameToDelete.toUpperCase())){
                 catList.remove(i);
                 System.out.println(String.format("%s is deleted", nameToDelete));
                 return;
@@ -238,43 +238,61 @@ public class Menu {
         String userInput = input.nextLine();
         boolean flag = true;
         for(int i = 0; i < catList.size(); i++){
-            if (catList.get(i).name().contains(userInput.toUpperCase())){
+            if (catList.get(i).name().toUpperCase().contains(userInput.toUpperCase())){
                 flag = false;
                 System.out.println(catList.get(i));
-            }
-            
+            }            
         }
-        if (flag) System.out.println("Name is not found.");
-        }
+        if (flag){
+            System.out.println("Name is not found.");
+        } 
+    }
         
     public void executeRiskReport(LinkedList<Panthera> catList){
-        //get user input
-        System.out.print("\nEnter a first big cat's name: ");
-        String name1 = input.nextLine();
-
         Float longtitude1 = 0f;
         Float latitude1 = 0f;
         Float longtitude2 = 0f;
         Float latitude2 = 0f;
+        boolean flag = true;
+        String name1 = "";
+        String name2 = "";
 
-        for(int i = 0; i < catList.size(); i++){
-            if(catList.get(i).name().equals(name1.toUpperCase())){
-                longtitude1 = catList.get(i).longitude();
-                latitude1 = catList.get(i).latitude();                
-                break;
-            }              
-        }
+        //get user input        
+        while(flag){
+            System.out.print("\nEnter a first big cat's name: ");
+            name1 = input.nextLine();
 
-        System.out.print("Enter a second big cat's name: ");
-        String name2 = input.nextLine();
-
-        for(int j = 0; j < catList.size(); j++){
-            if(catList.get(j).name().equals(name2.toUpperCase())){
-                longtitude2 = catList.get(j).longitude();
-                latitude2 = catList.get(j).latitude();
-                break;
+            for(int i = 0; i < catList.size(); i++){
+                if(catList.get(i).name().toUpperCase().equals(name1.toUpperCase())){
+                    longtitude1 = catList.get(i).longitude();
+                    latitude1 = catList.get(i).latitude(); 
+                    flag = false;               
+                    break;
+                }                         
+            }
+            if(flag){
+            System.out.println(String.format("%s is not exist.", name1));            
             }
         }
+        
+        flag = true;
+        while(flag){
+            System.out.print("Enter a second big cat's name: ");
+            name2 = input.nextLine();
+
+            for(int j = 0; j < catList.size(); j++){
+                if(catList.get(j).name().toUpperCase().equals(name2.toUpperCase())){
+                    longtitude2 = catList.get(j).longitude();
+                    latitude2 = catList.get(j).latitude();
+                    flag = false;
+                    break;
+                }               
+            }
+            if(true){
+                System.out.println(String.format("%s is not exist.", name2));  
+            }
+        }
+
         Float distance = (float) Math.sqrt(Math.pow(longtitude2 - longtitude1, 2) + Math.pow(latitude2 - latitude1, 2));
         System.out.println(String.format("\nThe distance between %s and %s is %f", name1, name2, distance));
 
