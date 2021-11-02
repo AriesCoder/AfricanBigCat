@@ -1,20 +1,17 @@
 package com.assigment3;
-/* 
-* Menu class for the african big cat app 
-*/
 
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Menu {
 
-     // attributes    
-     private Scanner input;   
+    // attributes    
+    private Scanner input;   
 
-     // constructor    
-     public Menu() {        
-         // initialize attributes        
-         this.input = new Scanner(System.in);
+    // constructor    
+    public Menu() {        
+        // initialize attributes        
+        this.input = new Scanner(System.in);
     }
 
     // prints the menu    
@@ -65,10 +62,7 @@ public class Menu {
     public Boolean executeCommand(Character command, LinkedList<Panthera> catList) {
 
         Boolean success = true;        
-        /*            
-        TIP:            
-        In this area of the code, the additional commands need to be created and added.     
-        */        
+              
         switch(command) {            
             case 'c':                
                 executeCreate(catList);                
@@ -88,6 +82,10 @@ public class Menu {
 
             case 'r':
                 executeRiskReport(catList);
+                break;
+
+            case 'w':
+                executeWarningReport(catList);
                 break;
 
             case 'q': 
@@ -125,13 +123,6 @@ public class Menu {
     }  
 
     public Panthera getNewCat(String name) {        
-        /*            
-        TIP:            
-        In this area of the code, students need to get input from the user for the type of cat             
-        and create the correct type.            
-        Currently, the code always create a Tiger.  But, support for Lions and Jaguars            
-        also needs to be added.        
-        */
         
         Panthera result = null;             
         
@@ -174,9 +165,9 @@ public class Menu {
         for (int i = 0; i < catList.size();){
 
                              
-            if (catList.get(i).name().equals(name.toUpperCase())){
+            if (catList.get(i).name().toUpperCase().equals(name.toUpperCase())){
 
-                System.out.println("This name is existed. Please choose another one!");
+                System.out.println("This name is used. Please choose another one!");
                 System.out.println(); 
 
                 System.out.print("Enter a name for the big cat to create: ");  
@@ -205,14 +196,14 @@ public class Menu {
 
         Panthera cat;        
         if (catList.size() > 0) {            
-            for (Integer i = 0; i < catList.size(); i++) {                
+            for (int i = 0; i < catList.size(); i++) {                
                 cat = catList.get(i);
                 cat.setSpeed();
-                System.out.println(cat);
-                
+                System.out.print(String.format("#%03d", i+1));
+                System.out.println(cat);               
             }        
         } else {            
-            System.out.println("There are no African Big Cats. :(");        
+            System.out.println("There is no African Big Cats. :(");        
         }
         System.out.println();    
     }
@@ -224,11 +215,11 @@ public class Menu {
         for(int i = 0; i < catList.size(); i++ ){
             if (catList.get(i).name().toUpperCase().equals(nameToDelete.toUpperCase())){
                 catList.remove(i);
-                System.out.println(String.format("%s is deleted", nameToDelete));
+                System.out.println(String.format("%s has been deleted successfully", nameToDelete));
                 return;
             }
         }    
-                System.out.println(String.format("%s is not exist", nameToDelete));
+                System.out.println(String.format("Error: There is no %s in the list", nameToDelete));
              
                 
     }
@@ -239,12 +230,13 @@ public class Menu {
         boolean flag = true;
         for(int i = 0; i < catList.size(); i++){
             if (catList.get(i).name().toUpperCase().contains(userInput.toUpperCase())){
+                catList.get(i).setSpeed();
                 flag = false;
                 System.out.println(catList.get(i));
             }            
         }
         if (flag){
-            System.out.println("Name is not found.");
+            System.out.println("Error: Big Cat's name is not found in the list.");
         } 
     }
         
@@ -256,9 +248,11 @@ public class Menu {
         boolean flag = true;
         String name1 = "";
         String name2 = "";
+        Panthera firstCat = null;
+        Panthera secondCat = null;
 
-        //get user input        
-        while(flag){
+        //get first big cat's name        
+        while(flag){                 //the loop runs until getting an existing name
             System.out.print("\nEnter a first big cat's name: ");
             name1 = input.nextLine();
 
@@ -266,36 +260,68 @@ public class Menu {
                 if(catList.get(i).name().toUpperCase().equals(name1.toUpperCase())){
                     longtitude1 = catList.get(i).longitude();
                     latitude1 = catList.get(i).latitude(); 
+                    firstCat = catList.get(i);
                     flag = false;               
                     break;
                 }                         
             }
             if(flag){
-            System.out.println(String.format("%s is not exist.", name1));            
+            System.out.println(String.format("%s does not exist.", name1));            
             }
         }
-        
+        // get second big cat's name
         flag = true;
-        while(flag){
-            System.out.print("Enter a second big cat's name: ");
+        while(flag){                //the loop runs until getting an existing name
+            System.out.print("\nEnter a second big cat's name: ");
             name2 = input.nextLine();
 
             for(int j = 0; j < catList.size(); j++){
                 if(catList.get(j).name().toUpperCase().equals(name2.toUpperCase())){
                     longtitude2 = catList.get(j).longitude();
                     latitude2 = catList.get(j).latitude();
+                    secondCat = catList.get(j);
                     flag = false;
                     break;
                 }               
             }
-            if(true){
-                System.out.println(String.format("%s is not exist.", name2));  
+            if(flag){
+                System.out.println(String.format("%s does not exist.", name2));  
             }
         }
+        System.out.println("\n***** Risk Report *****");
+        System.out.println("\n" + firstCat);
+        System.out.println(secondCat);
 
+        // get distance between two big cats
         Float distance = (float) Math.sqrt(Math.pow(longtitude2 - longtitude1, 2) + Math.pow(latitude2 - latitude1, 2));
         System.out.println(String.format("\nThe distance between %s and %s is %f", name1, name2, distance));
 
+    }
+
+    public void executeWarningReport(LinkedList<Panthera> catList){      
+
+        System.out.print("Enter your current longtitude: ");
+        float userLongtitude = input.nextFloat();
+        System.out.print("\nEnter your current latitude: ");
+        float userLatitude = input.nextFloat();
+
+        float closestDistance = (float) Math.sqrt(Math.pow(userLongtitude - catList.get(0).longitude(), 2) + Math.pow(userLatitude - catList.get(0).latitude(), 2));
+        Panthera closestCat = catList.get(0);
+
+        for(int i = 1; i < catList.size(); i++){
+            float bigCatLongtitude = catList.get(i).longitude();
+            float bigCatLatitude = catList.get(i).latitude();
+            float distance = (float) Math.sqrt(Math.pow(userLongtitude - bigCatLongtitude, 2) + Math.pow(userLatitude - bigCatLatitude, 2));
+            if (distance < closestDistance){
+                closestDistance = distance;
+                closestCat = catList.get(i);
+            }
+        }
+
+        System.out.println("\n***** Warning Report *****");
+        System.out.println(String.format("\nThe closest cat is %s which is at a distance of %f\n", closestCat.name(), closestDistance));
+        System.out.println(closestCat);
+        
     }
         
 }    

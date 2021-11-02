@@ -1,16 +1,11 @@
 package com.assigment3;
-
 import java.util.Random;
 
 /* 
 * Panthera base class that simulates GPS information 
 */
 public class Panthera extends PantheraGPS{
-    /*        
-    TIP:        
-    Students will need to add additional attributes and methods to complete this classes        
-    implementation.     
-    */    
+  
 
     //add attributes
     private int weight;
@@ -27,7 +22,7 @@ public class Panthera extends PantheraGPS{
         Random w = new Random();
         this.weight = w.nextInt(100-10) + 10; 
 
-        //setSpeed();
+        this.setSpeed();
 
     }
 

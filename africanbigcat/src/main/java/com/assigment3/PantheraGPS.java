@@ -1,5 +1,4 @@
 package com.assigment3;
-
 import java.util.Random;
 /* 
 * Panthera base class that simulates GPS information 
@@ -35,7 +34,8 @@ public class PantheraGPS {
 
         // move the panthera into it's initial position        
         this.longitude = longitudeRandom.nextFloat() * maxLongitude;        
-        this.latitude = latitudeRandom.nextFloat() * maxLatitude;    
+        this.latitude = latitudeRandom.nextFloat() * maxLatitude; 
+            
     }    
     // serializes attributes into a string    
     public String toString() { 
@@ -50,8 +50,8 @@ public class PantheraGPS {
         s += ", ";        
         s += "longitude: " + this.longitude();        
         s += ", ";        
-        s += "latitude: " + this.latitude();        
-        s += " }";
+        s += "latitude: " + this.latitude();  
+        s += ", "; 
         return s;    
     }    
 
@@ -76,7 +76,7 @@ public class PantheraGPS {
             seed += (int) ch;        
         }        
         return seed;    
-    }    
+    } 
     public void move() {        
         this.longitude += longitudeRandom.nextFloat() * maxSpeed;        
         this.latitude += latitudeRandom.nextFloat() * maxSpeed;    
